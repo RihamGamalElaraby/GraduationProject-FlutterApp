@@ -32,7 +32,9 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               )),
             ),
-            Image.asset('assets/images/LOGO.PNG'),
+            Image(
+              image: AssetImage('images/logo.png'),
+            )
           ],
         ),
       ),

@@ -1,23 +1,83 @@
+import 'package:comfyview/layouts/GlobeLayout.dart';
+import 'package:comfyview/screens/LoginSreen.dart';
 import 'package:flutter/material.dart';
-import 'screens/LoginSreen.dart';
+import 'package:comfyview/cubit/states.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'cubit/blocObserver.dart';
+import 'package:comfyview/cubit/cubit.dart';
+import 'screens/WelcomeScreen.dart';
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+
+  runApp(
+    BlocProvider(
+      create: (context) => ComfyviewCubit(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 40, 183, 230)),
-        useMaterial3: true,
-      ),
-      home: LoginScreen(),
-    );
+    return BlocConsumer<ComfyviewCubit, ComfyviewState>(
+        listener: (context, state) => {},
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'SuperMarket',
+            // home: OnBoardingScreen(),
+            theme: ThemeData(
+              primaryColor: Colors.blue[600],
+              textTheme: TextTheme(
+                bodyLarge: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                titleMedium: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+              scaffoldBackgroundColor: Colors.lightBlue[50],
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.blueGrey[50],
+                iconTheme: IconThemeData(
+                  color: Color.fromRGBO(169, 166, 165, 0.612),
+                ),
+                titleTextStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.white,
+                  statusBarBrightness: Brightness.dark,
+                ),
+              ),
+              bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                selectedItemColor: Color.fromRGBO(3, 3, 3, 0.612),
+                backgroundColor: Colors.white,
+                type: BottomNavigationBarType.fixed,
+                elevation: 100,
+              ),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Color.fromARGB(99, 0, 0, 0),
+              ),
+              useMaterial3: true,
+            ),
+
+            initialRoute: 'welcomeScreen',
+            routes: {
+              'welcomeScreen': (context) => OnBoardingScreen(),
+              'loginScreen': (context) => LoginScreen(),
+              'layoutScreen': (context) => GlobalLayout(),
+            },
+          );
+        });
   }
 }
