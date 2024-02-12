@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:comfyview/screens/resultScreen.dart';
 
 class GlobalLayout extends StatefulWidget {
   const GlobalLayout({super.key});
@@ -11,26 +12,30 @@ class _GlobalLayoutState extends State<GlobalLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leadingWidth: 100,
-        backgroundColor: Colors.blue[50],
-        title: Center(
-          child: Text(
-            'Comfy View',
-            style: TextStyle(color: Colors.blue[900]),
-          ),
+        backgroundColor: Colors.white,
+        title: Text(
+          'Comfy View',
+          style: TextStyle(fontSize: 22, color: Colors.black),
         ),
-        leading: Image(
-          width: 100,
-          image: AssetImage(
-            'images/logo.png',
-          ),
-        ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.person_pin))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'profileScreen');
+              },
+              icon: Icon(
+                Icons.person_3_sharp,
+                size: 40,
+                color: Colors.blue,
+              ))
+        ],
       ),
-      body: Text('trial'),
+      body: resultScreen(),
       bottomNavigationBar: BottomNavigationBar(
           elevation: 100,
+          selectedItemColor: Colors.blue,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
@@ -39,7 +44,7 @@ class _GlobalLayoutState extends State<GlobalLayout> {
                   Icons.front_hand_rounded,
                 )),
             BottomNavigationBarItem(
-                label: 'Search',
+                label: 'Lost&Found',
                 icon: Icon(
                   Icons.search,
                 )),

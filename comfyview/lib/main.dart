@@ -1,5 +1,7 @@
 import 'package:comfyview/layouts/GlobeLayout.dart';
-import 'package:comfyview/screens/LoginSreen.dart';
+import 'package:comfyview/screens/LoginSreenCamers.dart';
+import 'package:comfyview/screens/ProfileScreen.dart';
+import 'package:comfyview/screens/resultScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:comfyview/cubit/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,8 @@ import 'cubit/blocObserver.dart';
 import 'package:comfyview/cubit/cubit.dart';
 import 'screens/WelcomeScreen.dart';
 import 'package:flutter/services.dart';
+import 'screens/LoginScreenPassword.dart';
+import 'screens/registerScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,8 +78,12 @@ class MyApp extends StatelessWidget {
             initialRoute: 'welcomeScreen',
             routes: {
               'welcomeScreen': (context) => OnBoardingScreen(),
-              'loginScreen': (context) => LoginScreen(),
+              'loginScreenCamera': (context) => LoginScreen(),
               'layoutScreen': (context) => GlobalLayout(),
+              'loginScreenPass': (context) => LoginScreenPassword(),
+              'RegisterScreen': (context) => RegisterScreen(),
+              'ResultScreen': (context) => resultScreen(),
+              'profileScreen': (context) => ProfileScreen(),
             },
           );
         });
