@@ -1,5 +1,7 @@
+import 'package:comfyview/cubit/cubit.dart';
+import 'package:comfyview/cubit/states.dart';
 import 'package:flutter/material.dart';
-import 'package:comfyview/screens/resultScreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GlobalLayout extends StatefulWidget {
   const GlobalLayout({super.key});
@@ -11,54 +13,76 @@ class GlobalLayout extends StatefulWidget {
 class _GlobalLayoutState extends State<GlobalLayout> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        leadingWidth: 100,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Comfy View',
-          style: TextStyle(fontSize: 22, color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'profileScreen');
+    return BlocConsumer<ComfyviewCubit, ComfyviewState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            leadingWidth: 100,
+            backgroundColor: Colors.white,
+            title: Text(
+              'Comfy View',
+              style: TextStyle(fontSize: 22, color: Colors.black),
+            ),
+            actions: [
+              // IconButton(
+              //     padding: EdgeInsets.all(0),
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, 'lostandfound');
+              //     },
+              //     icon: Icon(
+              //       Icons.search,
+              //       size: 25,
+              //       color: Colors.blue,
+              //     )),
+              IconButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {
+                    // navigatTo(context, LostAndFound());
+                    Navigator.pushNamed(context, 'profileScreen');
+                  },
+                  icon: Icon(
+                    Icons.person_3_sharp,
+                    size: 25,
+                    color: Colors.blue,
+                  )),
+            ],
+          ),
+          body: ComfyviewCubit.get(context)
+              .screens[ComfyviewCubit.get(context).currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+              onTap: (index) {
+                ComfyviewCubit.get(context).changeBottomIndex(index);
               },
-              icon: Icon(
-                Icons.person_3_sharp,
-                size: 40,
-                color: Colors.blue,
-              ))
-        ],
-      ),
-      body: resultScreen(),
-      bottomNavigationBar: BottomNavigationBar(
-          elevation: 100,
-          selectedItemColor: Colors.blue,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-                label: 'Result',
-                icon: Icon(
-                  Icons.front_hand_rounded,
-                )),
-            BottomNavigationBarItem(
-                label: 'Lost&Found',
-                icon: Icon(
-                  Icons.search,
-                )),
-            BottomNavigationBarItem(
-                label: 'Shoping',
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                )),
-            BottomNavigationBarItem(
-                label: 'Setting',
-                icon: Icon(
-                  Icons.settings,
-                )),
-          ]),
+              currentIndex: ComfyviewCubit.get(context).currentIndex,
+              elevation: 100,
+              selectedItemColor: Colors.blue,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                BottomNavigationBarItem(
+                    label: 'Result',
+                    icon: Icon(
+                      Icons.front_hand_rounded,
+                    )),
+                BottomNavigationBarItem(
+                    label: 'Lost&Found',
+                    icon: Icon(
+                      Icons.search,
+                    )),
+                BottomNavigationBarItem(
+                    label: 'Shoping',
+                    icon: Icon(
+                      Icons.shopping_cart_outlined,
+                    )),
+                BottomNavigationBarItem(
+                    label: 'Setting',
+                    icon: Icon(
+                      Icons.settings,
+                    )),
+              ]),
+        );
+      },
     );
   }
 }

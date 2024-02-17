@@ -1,15 +1,19 @@
+import 'package:comfyview/cubit/cubit.dart';
+import 'package:comfyview/cubit/states.dart';
 import 'package:comfyview/layouts/GlobeLayout.dart';
 import 'package:comfyview/screens/LoginSreenCamers.dart';
 import 'package:comfyview/screens/ProfileScreen.dart';
+import 'package:comfyview/screens/ecommerceScreen.dart';
+import 'package:comfyview/screens/lostandFoundScreen.dart';
 import 'package:comfyview/screens/resultScreen.dart';
+import 'package:comfyview/screens/settingScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:comfyview/cubit/states.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'cubit/blocObserver.dart';
-import 'package:comfyview/cubit/cubit.dart';
-import 'screens/WelcomeScreen.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cubit/blocObserver.dart';
 import 'screens/LoginScreenPassword.dart';
+import 'screens/WelcomeScreen.dart';
 import 'screens/registerScreen.dart';
 
 void main() async {
@@ -84,6 +88,9 @@ class MyApp extends StatelessWidget {
               'RegisterScreen': (context) => RegisterScreen(),
               'ResultScreen': (context) => resultScreen(),
               'profileScreen': (context) => ProfileScreen(),
+              'settinfScreen': (context) => SettingScreen(),
+              'lostandfound': (context) => LostAndFound(),
+              'ecommerceScreen': (context) => EcommerceScreen(),
             },
           );
         });
