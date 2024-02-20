@@ -11,7 +11,7 @@ class resultScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
+          const Center(
             child: Text(
               'The Result of the captured \n  photo will appear here',
               style: TextStyle(
@@ -20,14 +20,14 @@ class resultScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Expanded(
@@ -39,7 +39,7 @@ class resultScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(children: [
-                          Container(
+                          const SizedBox(
                             height: 80,
                             width: 80,
                             child: CircleAvatar(
@@ -49,11 +49,11 @@ class resultScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 50,
                           ),
                           Expanded(
-                            child: Container(
+                            child: SizedBox(
                               height: 100,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +71,7 @@ class resultScreen extends StatelessWidget {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      Text(
+                                      const Text(
                                         ' Chair',
                                         // article['title']
                                         //     as String, // Ensure that it's cast to String
@@ -96,7 +96,7 @@ class resultScreen extends StatelessWidget {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         child: Text(
                                           'https://www.google.com/maps/',
                                           // article['title']
@@ -120,7 +120,7 @@ class resultScreen extends StatelessWidget {
                                             .textTheme
                                             .bodyLarge,
                                       ),
-                                      Text(
+                                      const Text(
                                         '09:30 AM',
                                         // '${article['publishedAt']}',
                                         style: TextStyle(
@@ -137,7 +137,7 @@ class resultScreen extends StatelessWidget {
                         ]),
                       ),
                     ),
-                separatorBuilder: (context, index) => Divider(
+                separatorBuilder: (context, index) => const Divider(
                       thickness: 1,
                       color: Colors.blue,
                     ),

@@ -21,7 +21,7 @@ class SettingScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(50)),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               CircleAvatar(
                   radius: 30,
                   child: Image(
@@ -56,10 +56,10 @@ class SettingScreen extends StatelessWidget {
               )
             ]),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
@@ -69,27 +69,27 @@ class SettingScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   child: Icon(Icons.person),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text(
+                const Text(
                   'Edit personal data',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded)),
+                    onPressed: () {}, icon: const Icon(Icons.arrow_forward_rounded)),
               ],
             ),
           ),
           //
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
@@ -99,28 +99,28 @@ class SettingScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
-                  child: Icon(Icons.lock),
+                const CircleAvatar(
                   backgroundColor: Colors.blue,
+                  child: Icon(Icons.lock),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text(
+                const Text(
                   'Change Password',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded)),
+                    onPressed: () {}, icon: const Icon(Icons.arrow_forward_rounded)),
               ],
             ),
           ),
           //
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
@@ -130,28 +130,28 @@ class SettingScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
-                  child: Icon(Icons.contact_support),
+                const CircleAvatar(
                   backgroundColor: Colors.grey,
+                  child: Icon(Icons.contact_support),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text(
+                const Text(
                   'Contact US',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded)),
+                    onPressed: () {}, icon: const Icon(Icons.arrow_forward_rounded)),
               ],
             ),
           ),
           //
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
@@ -161,29 +161,29 @@ class SettingScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
-                  child: Icon(Icons.rule_sharp),
+                const CircleAvatar(
                   backgroundColor: Colors.yellow,
+                  child: Icon(Icons.rule_sharp),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text(
+                const Text(
                   'Terms & Policy',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded)),
+                    onPressed: () {}, icon: const Icon(Icons.arrow_forward_rounded)),
               ],
             ),
           ),
           //
           //
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
@@ -194,27 +194,27 @@ class SettingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CircleAvatar(
-                  child: Icon(Icons.help),
                   backgroundColor: Colors.purple[200],
+                  child: const Icon(Icons.help),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text(
+                const Text(
                   'About Us',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded)),
+                    onPressed: () {}, icon: const Icon(Icons.arrow_forward_rounded)),
               ],
             ),
           ),
           //
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.blue,
           ),
@@ -223,23 +223,23 @@ class SettingScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
-                  child: Icon(Icons.logout),
+                const CircleAvatar(
                   backgroundColor: Colors.red,
+                  child: Icon(Icons.logout),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text(
+                const Text(
                   'Log-out',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.arrow_forward_rounded)),
+                    onPressed: () {}, icon: const Icon(Icons.arrow_forward_rounded)),
               ],
             ),
           ),

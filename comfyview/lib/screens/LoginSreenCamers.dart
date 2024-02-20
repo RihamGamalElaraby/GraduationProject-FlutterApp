@@ -5,7 +5,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   // Color backgroundColor = Colors.blue[600];
-  Color containerColor = Color.fromARGB(255, 21, 129, 216);
+  Color containerColor = const Color.fromARGB(255, 21, 129, 216);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                   color: Colors.blue[300],
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: Center(
+                child: const Center(
                     child: Text(
                   'Comfy View',
                   style: TextStyle(
@@ -37,10 +37,10 @@ class LoginScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Center(
+              const Center(
                 child: Text(
                   'Login',
                   style: TextStyle(
@@ -52,19 +52,19 @@ class LoginScreen extends StatelessWidget {
               // SizedBox(
               //   height: 30,
               // ),
-              Image(
+              const Image(
                 height: 200,
                 width: double.infinity,
                 image: AssetImage('images/faceprint.png'),
               ),
-              Text(
+              const Text(
                 'We protect your information with',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
-              Text(
+              const Text(
                 'Face-print',
                 style: TextStyle(
                     color: Colors.black,
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Open Camera',
                     style: TextStyle(
                         color: Colors.black,
@@ -84,13 +84,13 @@ class LoginScreen extends StatelessWidget {
                   IconButton(
                       highlightColor: Colors.yellow,
                       onPressed: () {},
-                      icon: Icon(Icons.camera_alt_outlined)),
+                      icon: const Icon(Icons.camera_alt_outlined)),
                 ],
               ),
               ConditionalBuilder(
                   condition: true,
                   // condition: state is! ShopLoginLoadingStates,
-                  builder: (context) => Container(
+                  builder: (context) => SizedBox(
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
@@ -102,17 +102,14 @@ class LoginScreen extends StatelessWidget {
                             // }
                           },
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 24.0),
+                            foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 24.0), backgroundColor: const Color.fromRGBO(30, 136, 229, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            primary: Color.fromRGBO(30, 136, 229, 1),
-                            // Background color
-                            onPrimary: Colors.white, // Text color
+                            ), // Text color
                             elevation: 10.0, // Elevation
                           ),
-                          child: Text(
+                          child: const Text(
                             'Login',
                             style: TextStyle(
                               fontSize: 18.0,
@@ -129,7 +126,7 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Login Using Passward!',
                     style: TextStyle(
                         color: Colors.black,
@@ -140,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, 'loginScreenPass');
                       },
-                      child: Text(
+                      child: const Text(
                         'HERE',
                         style: TextStyle(
                             color: Colors.blue,
@@ -152,7 +149,7 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Don\'t have an account!',
                     style: TextStyle(
                         color: Colors.black,
@@ -163,7 +160,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, 'RegisterScreen');
                       },
-                      child: Text(
+                      child: const Text(
                         'REGISTER',
                         style: TextStyle(
                             color: Colors.blue,

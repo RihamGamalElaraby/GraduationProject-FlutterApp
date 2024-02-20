@@ -9,12 +9,12 @@ class LostAndFound extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          Text(
+          const Text(
             'Write HERE',
             style: TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           TextFormField(
@@ -26,29 +26,29 @@ class LostAndFound extends StatelessWidget {
             //   }
             // },
             decoration: InputDecoration(
-              label: Text('Search'),
-              focusedErrorBorder: OutlineInputBorder(
+              label: const Text('Search'),
+              focusedErrorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black, width: 5.0),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                     color: Color.fromRGBO(30, 136, 229, 1), width: 2.0),
               ),
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
               hintText: 'Search',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.black,
           ),
-          Center(
+          const Center(
             child: Text(
               'Results',
               style: TextStyle(
@@ -57,7 +57,7 @@ class LostAndFound extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Expanded(
@@ -71,7 +71,7 @@ class LostAndFound extends StatelessWidget {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
+                              const SizedBox(
                                 height: 80,
                                 width: 80,
                                 child: CircleAvatar(
@@ -81,11 +81,11 @@ class LostAndFound extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 50,
                               ),
                               Expanded(
-                                child: Container(
+                                child: SizedBox(
                                   height: 150,
                                   child: Column(
                                     crossAxisAlignment:
@@ -104,7 +104,7 @@ class LostAndFound extends StatelessWidget {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                          Text(
+                                          const Text(
                                             ' Chair',
                                             // article['title']
                                             //     as String, // Ensure that it's cast to String
@@ -129,7 +129,7 @@ class LostAndFound extends StatelessWidget {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                          Expanded(
+                                          const Expanded(
                                             child: Text(
                                               'https://www.google.com/maps/',
                                               // article['title']
@@ -153,7 +153,7 @@ class LostAndFound extends StatelessWidget {
                                                 .textTheme
                                                 .bodyLarge,
                                           ),
-                                          Text(
+                                          const Text(
                                             '09:30 AM',
                                             // '${article['publishedAt']}',
                                             style: TextStyle(
@@ -174,7 +174,7 @@ class LostAndFound extends StatelessWidget {
                                           ),
                                           IconButton(
                                               onPressed: () {},
-                                              icon: Icon(Icons.gps_fixed))
+                                              icon: const Icon(Icons.gps_fixed))
                                         ],
                                       ),
                                     ],
@@ -184,7 +184,7 @@ class LostAndFound extends StatelessWidget {
                             ]),
                       ),
                     ),
-                separatorBuilder: (context, index) => Divider(
+                separatorBuilder: (context, index) => const Divider(
                       thickness: 1,
                       color: Colors.blue,
                     ),

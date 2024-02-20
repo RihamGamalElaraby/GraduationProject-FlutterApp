@@ -1,8 +1,11 @@
 import 'package:comfyview/cubit/cubit.dart';
 import 'package:comfyview/cubit/states.dart';
+import 'package:comfyview/database/dioHelper.dart';
 import 'package:comfyview/layouts/GlobeLayout.dart';
+import 'package:comfyview/screens/LoginScreenPasseword/Cubit/LoginPasswordCubit.dart';
 import 'package:comfyview/screens/LoginSreenCamers.dart';
 import 'package:comfyview/screens/ProfileScreen.dart';
+import 'package:comfyview/screens/RegisterScreen/Cubit/RegisterCubit.dart';
 import 'package:comfyview/screens/ecommerceScreen.dart';
 import 'package:comfyview/screens/lostandFoundScreen.dart';
 import 'package:comfyview/screens/resultScreen.dart';
@@ -12,23 +15,32 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/blocObserver.dart';
-import 'screens/LoginScreenPassword.dart';
+import 'screens/LoginScreenPasseword/LoginScreenPassword.dart';
+import 'screens/RegisterScreen/registerScreen.dart';
 import 'screens/WelcomeScreen.dart';
-import 'screens/registerScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-
+  DioHelper.dio;
+  // DioHelper.dio();
   runApp(
-    BlocProvider(
-      create: (context) => ComfyviewCubit(),
-      child: MyApp(),
+    MultiBlocProvider(
+      child: const MyApp(),
+      providers: [
+        BlocProvider(
+          create: (context) => ComfyviewCubit(),
+        ),
+        BlocProvider(create: (context) => LoginPasswordCubit() , ),
+        BlocProvider(create: (context) => RegisterCubit())
+      ],
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ComfyviewCubit, ComfyviewState>(
@@ -39,7 +51,7 @@ class MyApp extends StatelessWidget {
             // home: OnBoardingScreen(),
             theme: ThemeData(
               primaryColor: Colors.blue[600],
-              textTheme: TextTheme(
+              textTheme: const TextTheme(
                 bodyLarge: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -54,43 +66,43 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.lightBlue[50],
               appBarTheme: AppBarTheme(
                 backgroundColor: Colors.blueGrey[50],
-                iconTheme: IconThemeData(
+                iconTheme: const IconThemeData(
                   color: Color.fromRGBO(169, 166, 165, 0.612),
                 ),
-                titleTextStyle: TextStyle(
+                titleTextStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-                systemOverlayStyle: SystemUiOverlayStyle(
+                systemOverlayStyle: const SystemUiOverlayStyle(
                   statusBarColor: Colors.white,
                   statusBarBrightness: Brightness.dark,
                 ),
               ),
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 selectedItemColor: Color.fromRGBO(3, 3, 3, 0.612),
                 backgroundColor: Colors.white,
                 type: BottomNavigationBarType.fixed,
                 elevation: 100,
               ),
               colorScheme: ColorScheme.fromSeed(
-                seedColor: Color.fromARGB(99, 0, 0, 0),
+                seedColor: const Color.fromARGB(99, 0, 0, 0),
               ),
               useMaterial3: true,
             ),
 
             initialRoute: 'welcomeScreen',
             routes: {
-              'welcomeScreen': (context) => OnBoardingScreen(),
+              'welcomeScreen': (context) => const OnBoardingScreen(),
               'loginScreenCamera': (context) => LoginScreen(),
-              'layoutScreen': (context) => GlobalLayout(),
+              'layoutScreen': (context) => const GlobalLayout(),
               'loginScreenPass': (context) => LoginScreenPassword(),
               'RegisterScreen': (context) => RegisterScreen(),
-              'ResultScreen': (context) => resultScreen(),
-              'profileScreen': (context) => ProfileScreen(),
-              'settinfScreen': (context) => SettingScreen(),
+              'ResultScreen': (context) => const resultScreen(),
+              'profileScreen': (context) => const ProfileScreen(),
+              'settinfScreen': (context) => const SettingScreen(),
               'lostandfound': (context) => LostAndFound(),
-              'ecommerceScreen': (context) => EcommerceScreen(),
+              'ecommerceScreen': (context) => const EcommerceScreen(),
             },
           );
         });

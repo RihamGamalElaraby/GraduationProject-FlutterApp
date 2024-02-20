@@ -11,7 +11,7 @@ class EcommerceScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -29,7 +29,7 @@ class EcommerceScreen extends StatelessWidget {
                     builder: (BuildContext context) {
                       return Container(
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Image.asset(
@@ -47,8 +47,8 @@ class EcommerceScreen extends StatelessWidget {
                   reverse: false,
                   enableInfiniteScroll: true,
                   autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(seconds: 1),
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(seconds: 1),
                   autoPlayCurve: Curves.fastOutSlowIn,
                   scrollDirection: Axis.horizontal,
                 ),
@@ -62,7 +62,7 @@ class EcommerceScreen extends StatelessWidget {
                   child: Stack(
                     alignment: AlignmentDirectional.bottomStart,
                     children: [
-                      Image(
+                      const Image(
                         height: 200,
                         width: double.infinity,
                         image: AssetImage('images/boarding2.jpg'),
@@ -70,8 +70,8 @@ class EcommerceScreen extends StatelessWidget {
                       //  if (model.discount != 0)
                       Container(
                         color: Colors.red,
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: const Text(
                           'DISCOUNT',
                           style: TextStyle(fontSize: 10.0, color: Colors.white),
                         ),
@@ -79,8 +79,8 @@ class EcommerceScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 8.0),
-                Text(
+                const SizedBox(height: 8.0),
+                const Text(
                   'Comfy View Glove!',
                   // model.name ?? 'NULL',
                   maxLines: 1,
@@ -91,7 +91,7 @@ class EcommerceScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 Row(
                   children: [
                     Text(
@@ -103,9 +103,9 @@ class EcommerceScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     // if (model.discount != 0)
-                    Text(
+                    const Text(
                       'Price: 1500\$',
                       //  ${model.old_price.round()}',
                       style: TextStyle(
@@ -115,7 +115,7 @@ class EcommerceScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(), // Add spacer to push the IconButton to the end
+                    const Spacer(), // Add spacer to push the IconButton to the end
                     CircleAvatar(
                       backgroundColor: Colors.grey,
                       // SuperMarketCubit.get(context)
@@ -132,16 +132,16 @@ class EcommerceScreen extends StatelessWidget {
                           //     .ChangeFacouriteData(model.id ?? 0);
                           // print(model.id);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.star,
-                          color: const Color.fromARGB(255, 255, 212, 212),
+                          color: Color.fromARGB(255, 255, 212, 212),
                           size: 20,
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -154,17 +154,14 @@ class EcommerceScreen extends StatelessWidget {
                     // }
                   },
                   style: ElevatedButton.styleFrom(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
+                    foregroundColor: Colors.white, padding:
+                        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0), backgroundColor: const Color.fromRGBO(30, 136, 229, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    primary: Color.fromRGBO(30, 136, 229, 1),
-                    // Background color
-                    onPrimary: Colors.white, // Text color
+                    ), // Text color
                     elevation: 10.0, // Elevation
                   ),
-                  child: Text(
+                  child: const Text(
                     'Add to Cart',
                     style: TextStyle(
                       fontSize: 18.0,

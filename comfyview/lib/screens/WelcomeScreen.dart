@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:comfyview/cubit/cubit.dart';
-import 'package:comfyview/shared/reusablecomponent.dart';
 
 class boardingModel {
   final String image;
@@ -16,7 +15,7 @@ class boardingModel {
 }
 
 class OnBoardingScreen extends StatefulWidget {
-  OnBoardingScreen({super.key});
+  const OnBoardingScreen({super.key});
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -95,20 +94,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           });
                         }
                       },
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) =>
                           BuildBoardingItem(boarding[index]),
                       itemCount: boarding.length,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Row(
                     children: [
                       SmoothPageIndicator(
                           controller: boarderController,
-                          effect: ExpandingDotsEffect(
+                          effect: const ExpandingDotsEffect(
                             dotColor: Colors.grey,
                             dotHeight: 10,
                             expansionFactor: 4,
@@ -117,25 +116,25 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             activeDotColor: Colors.blue,
                           ),
                           count: boarding.length),
-                      Spacer(),
+                      const Spacer(),
                       FloatingActionButton(
                         onPressed: () {
                           if (isLast) {
                             navigateandreplace(context, LoginScreen());
                           } else {
                             boarderController.nextPage(
-                                duration: Duration(milliseconds: 750),
+                                duration: const Duration(milliseconds: 750),
                                 curve: Curves.ease);
                           }
                         },
                         backgroundColor: Colors.blue[600],
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(60)),
-                        child: Icon(Icons.arrow_forward_ios_rounded),
+                        child: const Icon(Icons.arrow_forward_ios_rounded),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                 ],
@@ -150,24 +149,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         children: [
           Expanded(
               child: Image(
-            image: AssetImage('${model.image}'),
+            image: AssetImage(model.image),
           )),
           Text(
-            '${model.title}',
+            model.title,
             style: TextStyle(
               fontSize: 30,
               color: Colors.blueGrey[800],
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
-            '${model.body}',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            model.body,
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],

@@ -21,7 +21,7 @@ class _GlobalLayoutState extends State<GlobalLayout> {
           appBar: AppBar(
             leadingWidth: 100,
             backgroundColor: Colors.white,
-            title: Text(
+            title: const Text(
               'Comfy View',
               style: TextStyle(fontSize: 22, color: Colors.black),
             ),
@@ -37,12 +37,12 @@ class _GlobalLayoutState extends State<GlobalLayout> {
               //       color: Colors.blue,
               //     )),
               IconButton(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   onPressed: () {
                     // navigatTo(context, LostAndFound());
                     Navigator.pushNamed(context, 'profileScreen');
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.person_3_sharp,
                     size: 25,
                     color: Colors.blue,
@@ -59,7 +59,7 @@ class _GlobalLayoutState extends State<GlobalLayout> {
               elevation: 100,
               selectedItemColor: Colors.blue,
               type: BottomNavigationBarType.fixed,
-              items: [
+              items: const [
                 BottomNavigationBarItem(
                     label: 'Result',
                     icon: Icon(
