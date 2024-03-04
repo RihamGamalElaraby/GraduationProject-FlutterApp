@@ -1,50 +1,43 @@
+import 'package:comfyview/cubit/cubit.dart';
 import 'package:comfyview/cubit/states.dart';
 import 'package:comfyview/screens/LoginSreenCamers.dart';
-import 'package:comfyview/shared/reusablecomponent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:comfyview/cubit/cubit.dart';
 
-class boardingModel {
+class BoardingModel {
   final String image;
   final String title;
   final String body;
 
-  boardingModel({required this.image, required this.title, required this.body});
+  BoardingModel({required this.image, required this.title, required this.body});
 }
 
 class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  /*The project aims to provide a comprehensive solution for the blind by using an embedded 
-  system to detect and identify objects in the physical world, sending the information to a 
-  website and a mobile application, where AI technology is used to describe the objects and their surroundings in real-time.
-   The system can also help the blind navigate through obstacles by providing audio and haptic feedback through the mobile 
-   application to alert them of potential hazards.*/
-
-  List<boardingModel> boarding = [
-    boardingModel(
+  List<BoardingModel> boarding = [
+    BoardingModel(
       image: 'images/logo.png',
       body:
-          "The project aims to provide a comprehensive solution for the blind by using an embedded system to detect and identify objects in the physical world",
-      title: 'Comfy View App',
+          "Providing a comprehensive solution for the blind by using an embedded system to detect and identify objects in the physical world.",
+      title: 'Welcome to ComfyView',
     ),
-    boardingModel(
+    BoardingModel(
       image: 'images/boarding2.jpg',
       body:
-          'sending the information to a  website and a mobile application, where AI technology is used to describe the objects and their surroundings in real-time. The system can also help the blind navigate through obstacles by providing audio and haptic feedback through the mobile  application to alert them of potential hazards',
-      title: 'Purpose',
+          'Using AI technology to describe objects and surroundings in real-time, enabling the blind to navigate through obstacles safely.',
+      title: 'Our Mission',
     ),
-    boardingModel(
+    BoardingModel(
       image: 'images/boarding3.jpg',
-      body: 'ComfyView@gmail.com',
-      title: 'Devolpers',
+      body: 'Contact us at ComfyView@gmail.com for inquiries and support.',
+      title: 'Developers',
     ),
   ];
   bool isLast = false;
@@ -54,103 +47,102 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ComfyviewCubit, ComfyviewState>(
-      listener: (context, state) => {},
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      navigateandreplace(context, LoginScreen());
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
+                child: Text(
+                  'Skip',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[900],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: PageView.builder(
+                    controller: boarderController,
+                    onPageChanged: (int index) {
+                      setState(() {
+                        isLast = index == boarding.length - 1;
+                      });
                     },
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[900],
-                      ),
-                    ))
-              ],
-            ),
-            body: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: PageView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) =>
+                        BuildBoardingItem(boarding[index]),
+                    itemCount: boarding.length,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  children: [
+                    SmoothPageIndicator(
                       controller: boarderController,
-                      onPageChanged: (int index) {
-                        if (index == boarding.length - 1) {
-                          setState(() {
-                            isLast = true;
-                          });
+                      effect: const ExpandingDotsEffect(
+                        dotColor: Colors.grey,
+                        dotHeight: 10,
+                        expansionFactor: 4,
+                        dotWidth: 10,
+                        spacing: 5,
+                        activeDotColor: Colors.blue,
+                      ),
+                      count: boarding.length,
+                    ),
+                    const Spacer(),
+                    FloatingActionButton(
+                      onPressed: () {
+                        if (isLast) {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
                         } else {
-                          setState(() {
-                            isLast = false;
-                          });
+                          boarderController.nextPage(
+                              duration: const Duration(milliseconds: 750),
+                              curve: Curves.ease);
                         }
                       },
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) =>
-                          BuildBoardingItem(boarding[index]),
-                      itemCount: boarding.length,
+                      backgroundColor: Colors.blue[600],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(60)),
+                      child: const Icon(Icons.arrow_forward_ios_rounded),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    children: [
-                      SmoothPageIndicator(
-                          controller: boarderController,
-                          effect: const ExpandingDotsEffect(
-                            dotColor: Colors.grey,
-                            dotHeight: 10,
-                            expansionFactor: 4,
-                            dotWidth: 10,
-                            spacing: 5,
-                            activeDotColor: Colors.blue,
-                          ),
-                          count: boarding.length),
-                      const Spacer(),
-                      FloatingActionButton(
-                        onPressed: () {
-                          if (isLast) {
-                            navigateandreplace(context, LoginScreen());
-                          } else {
-                            boarderController.nextPage(
-                                duration: const Duration(milliseconds: 750),
-                                curve: Curves.ease);
-                          }
-                        },
-                        backgroundColor: Colors.blue[600],
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(60)),
-                        child: const Icon(Icons.arrow_forward_ios_rounded),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ),
-            ));
+                  ],
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
 
-  Widget BuildBoardingItem(boardingModel model) => Column(
+  Widget BuildBoardingItem(BoardingModel model) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-              child: Image(
-            image: AssetImage(model.image),
-          )),
+            child: Image.asset(
+              model.image,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(height: 20),
           Text(
             model.title,
             style: TextStyle(
@@ -158,17 +150,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               color: Colors.blueGrey[800],
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              model.body,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
           ),
-          Text(
-            model.body,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
+          SizedBox(height: 30),
         ],
       );
 }

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "33103850184",
+    "firebase_url": "https://graduation2-fb874-default-rtdb.firebaseio.com",
+    "project_id": "graduation2-fb874",
+    "storage_bucket": "graduation2-fb874.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33103850184:android:9c02bab765b2dc9dc9d3fd",
+        "android_client_info": {
+          "package_name": "com.example.comfyview"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtBhhKmFD_CYvZWcZuTwn8mlbZJI3uM2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

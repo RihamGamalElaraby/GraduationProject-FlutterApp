@@ -12,7 +12,7 @@ class ComfyviewCubit extends Cubit<ComfyviewState> {
 
   int currentIndex = 0;
   List<Widget> screens = [
-    const resultScreen(),
+    resultScreen(),
     LostAndFound(),
     const EcommerceScreen(),
     const SettingScreen()

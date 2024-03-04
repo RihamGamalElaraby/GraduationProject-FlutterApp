@@ -1,167 +1,83 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class EcommerceScreen extends StatelessWidget {
-  const EcommerceScreen({super.key});
+  const EcommerceScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
-              height: 150,
-              width: double.infinity,
-              child: CarouselSlider(
-                items: [
-                  'images/faceprint.png',
-                  'images/boarding2.jpg',
-                  'images/boarding3.jpg',
-                ].map((String imagePath) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        child: Image.asset(
-                          imagePath,
-                          fit: BoxFit.fill, // Adjust the fit as needed
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-                options: CarouselOptions(
-                  viewportFraction: 1.0,
-                  height: 250.5,
-                  initialPage: 0,
-                  reverse: false,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(seconds: 1),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  scrollDirection: Axis.horizontal,
+            // Product Image
+            Center(
+              child: CircleAvatar(
+                radius: 105,
+                backgroundColor: Colors.grey,
+                child: CircleAvatar(
+                  radius: 100,
+                  backgroundColor:
+                      Colors.grey[200], // Add background color for border
+                  child: CircleAvatar(
+                    radius: 145,
+                    backgroundImage: AssetImage('images/boarding2.jpg'),
+                  ),
                 ),
               ),
             ),
+            SizedBox(height: 20),
+            // Product Information
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 200, // Set a fixed height for the image
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomStart,
-                    children: [
-                      const Image(
-                        height: 200,
-                        width: double.infinity,
-                        image: AssetImage('images/boarding2.jpg'),
-                      ),
-                      //  if (model.discount != 0)
-                      Container(
-                        color: Colors.red,
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: const Text(
-                          'DISCOUNT',
-                          style: TextStyle(fontSize: 10.0, color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8.0),
-                const Text(
-                  'Comfy View Glove!',
-                  // model.name ?? 'NULL',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Text(
+                  'Comfy View Glove',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                SizedBox(height: 8),
                 Row(
                   children: [
                     Text(
-                      'Price: 1000\$ ',
-                      // : ${model.price.round()}',
+                      'Price: \$1000',
                       style: TextStyle(
                         color: Colors.teal[900],
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 5),
-                    // if (model.discount != 0)
-                    const Text(
-                      'Price: 1500\$',
-                      //  ${model.old_price.round()}',
+                    SizedBox(width: 10),
+                    Text(
+                      'Price: \$1500',
                       style: TextStyle(
                         decoration: TextDecoration.lineThrough,
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Spacer(), // Add spacer to push the IconButton to the end
-                    CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      // SuperMarketCubit.get(context)
-                      //         .favourite
-                      //         .containsKey(model.id)
-                      //     ? SuperMarketCubit.get(context).favourite[model.id]!
-                      //         ? Colors.teal
-                      //         : Colors.grey
-                      //     : Colors.grey,
-                      radius: 15.0,
-                      child: IconButton(
-                        onPressed: () {
-                          // SuperMarketCubit.get(context)
-                          //     .ChangeFacouriteData(model.id ?? 0);
-                          // print(model.id);
-                        },
-                        icon: const Icon(
-                          Icons.star,
-                          color: Color.fromARGB(255, 255, 212, 212),
-                          size: 20,
-                        ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.pushNamed(context, 'layoutScreen');
-                    // if (formKey.currentState!.validate()) {
-                    //   LoginCubit.get(context).userLogin(
-                    //       email: emailController.text,
-                    //       Password: passwarController.text);
-                    // }
+                    // Add to Cart Functionality
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white, padding:
-                        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0), backgroundColor: const Color.fromRGBO(30, 136, 229, 1),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 24),
+                    backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
-                    ), // Text color
-                    elevation: 10.0, // Elevation
+                    ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Add to Cart',
                     style: TextStyle(
                       fontSize: 18.0,
@@ -171,9 +87,155 @@ class EcommerceScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 20),
+            // Product Description
+            Text(
+              'Product Description',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus elit ligula, vel ullamcorper orci volutpat eget. Donec auctor, sem vel tristique feugiat, velit justo convallis lorem, et consectetur lacus orci id nulla. Quisque sed arcu in nunc lacinia eleifend. Proin non lacus nec tellus vestibulum fermentum. Aliquam tincidunt velit sit amet augue luctus, nec vestibulum magna malesuada.',
+              style: TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+
+
+
+// import 'package:flutter/material.dart';
+
+// class EcommerceScreen extends StatelessWidget {
+//   const EcommerceScreen({Key? key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(20.0),
+//       child: SingleChildScrollView(
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // Product Image
+//             AspectRatio(
+//               aspectRatio: 16 / 9,
+//               child: Container(
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(20),
+//                   image: DecorationImage(
+//                     image: AssetImage('images/boarding2.jpg'),
+//                     fit: BoxFit.cover,
+//                   ),
+//                 ),
+//                 child: Stack(
+//                   children: [
+//                     Positioned(
+//                       top: 10,
+//                       right: 10,
+//                       child: CircleAvatar(
+//                         backgroundColor: Colors.grey.withOpacity(0.5),
+//                         child: IconButton(
+//                           onPressed: () {
+//                             // Handle favorite button press
+//                           },
+//                           icon: Icon(
+//                             Icons.favorite,
+//                             color: Colors.red,
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+//             // Product Information
+//             Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(
+//                   'Comfy View Glove',
+//                   style: TextStyle(
+//                     color: Colors.black,
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 SizedBox(height: 8),
+//                 Row(
+//                   children: [
+//                     Text(
+//                       'Price: \$1000',
+//                       style: TextStyle(
+//                         color: Colors.teal[900],
+//                         fontSize: 18,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                     SizedBox(width: 10),
+//                     Text(
+//                       'Price: \$1500',
+//                       style: TextStyle(
+//                         decoration: TextDecoration.lineThrough,
+//                         color: Colors.grey,
+//                         fontSize: 16,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 SizedBox(height: 20),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     // Add to Cart Functionality
+//                   },
+//                   style: ElevatedButton.styleFrom(
+//                     padding: const EdgeInsets.symmetric(
+//                         vertical: 12, horizontal: 24),
+//                     backgroundColor: Colors.blue,
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(8.0),
+//                     ),
+//                   ),
+//                   child: Text(
+//                     'Add to Cart',
+//                     style: TextStyle(
+//                       fontSize: 18.0,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             SizedBox(height: 20),
+//             // Product Description
+//             Text(
+//               'Product Description',
+//               style: TextStyle(
+//                 fontSize: 20,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             SizedBox(height: 10),
+//             Text(
+//               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus elit ligula, vel ullamcorper orci volutpat eget. Donec auctor, sem vel tristique feugiat, velit justo convallis lorem, et consectetur lacus orci id nulla. Quisque sed arcu in nunc lacinia eleifend. Proin non lacus nec tellus vestibulum fermentum. Aliquam tincidunt velit sit amet augue luctus, nec vestibulum magna malesuada.',
+//               style: TextStyle(fontSize: 16),
+//             ),
+//             SizedBox(height: 20),
+//             // Similar Products
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

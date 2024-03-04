@@ -2,193 +2,164 @@ import 'package:flutter/material.dart';
 
 class LostAndFound extends StatelessWidget {
   LostAndFound({super.key});
+
   var searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Write HERE',
             style: TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            controller: searchController,
-            keyboardType: TextInputType.emailAddress,
-            // validator: (value) {
-            //   if (value == null) {
-            //     return 'please enter your email address';
-            //   }
-            // },
-            decoration: InputDecoration(
-              label: const Text('Search'),
-              focusedErrorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black, width: 5.0),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Color.fromRGBO(30, 136, 229, 1), width: 2.0),
-              ),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-              prefixIcon: const Icon(Icons.search),
-              hintText: 'Search',
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(height: 10),
+          TextFormField(
+            controller: searchController,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              labelText: 'Search',
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
           ),
-          const Divider(
+          SizedBox(height: 20),
+          Divider(
             thickness: 1,
             color: Colors.black,
           ),
-          const Center(
-            child: Text(
-              'Results',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+          SizedBox(height: 20),
+          Text(
+            'Results',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Expanded(
             child: ListView.separated(
-                itemBuilder: (context, index) => InkWell(
-                      onTap: () {
-                        // navigateTo(context, WebViewScreen(article['url']));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: CircleAvatar(
-                                  child: Image(
-                                    width: double.infinity,
-                                    image: AssetImage('images/faceprint.png'),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 50,
-                              ),
-                              Expanded(
-                                child: SizedBox(
-                                  height: 150,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Result:',
-                                            // article['title']
-                                            //     as String, // Ensure that it's cast to String
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          const Text(
-                                            ' Chair',
-                                            // article['title']
-                                            //     as String, // Ensure that it's cast to String
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Location: ',
-                                            // article['title']
-                                            //     as String, // Ensure that it's cast to String
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          const Expanded(
-                                            child: Text(
-                                              'https://www.google.com/maps/',
-                                              // article['title']
-                                              //     as String, // Ensure that it's cast to String
-                                              style: TextStyle(
-                                                  color: Colors.blue,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Time: ',
-                                            // '${article['publishedAt']}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge,
-                                          ),
-                                          const Text(
-                                            '09:30 AM',
-                                            // '${article['publishedAt']}',
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Open Google Maps: ',
-                                            // '${article['publishedAt']}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge,
-                                          ),
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(Icons.gps_fixed))
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ]),
+              itemBuilder: (context, index) => InkWell(
+                onTap: () {
+                  // Handle onTap
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('images/faceprint.png'),
                       ),
-                    ),
-                separatorBuilder: (context, index) => const Divider(
-                      thickness: 1,
-                      color: Colors.blue,
-                    ),
-                itemCount: 10),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Result: ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Chair',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Text(
+                                  'Location: ',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'https://www.google.com/maps/',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Text(
+                                  'Time: ',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '09:30 AM',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Text(
+                                  'Open Google Maps: ',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    // Handle Google Maps
+                                  },
+                                  icon: Icon(Icons.gps_fixed),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              separatorBuilder: (context, index) => Divider(
+                thickness: 1,
+                color: Colors.blue,
+              ),
+              itemCount: 10,
+            ),
           ),
         ],
       ),
