@@ -22,9 +22,7 @@ class LoginPasswordCubit extends Cubit<LoginPasswordStates> {
       final response = await DioHelper.postData(
         url: SIGNIN,
         data: {
-          // 'name': name,
           'email': email,
-          // 'glove_id': gloveid,
           'password': Password,
         },
       );
