@@ -26,8 +26,6 @@ class DioHelper {
 
   static Future<Response> postData({
     required String url,
-    // String lang = 'en',
-    // String token = '',
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
   }) async {

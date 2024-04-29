@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class EcommerceScreen extends StatelessWidget {
-  const EcommerceScreen({Key? key});
+  const EcommerceScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,19 +23,19 @@ class EcommerceScreen extends StatelessWidget {
                   radius: 100,
                   backgroundColor:
                       Colors.grey[200], // Add background color for border
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     radius: 145,
                     backgroundImage: AssetImage('images/boarding2.jpg'),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Product Information
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Comfy View Glove',
                   style: TextStyle(
                     color: Colors.black,
@@ -41,7 +43,7 @@ class EcommerceScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   children: [
                     Text(
@@ -52,8 +54,8 @@ class EcommerceScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Text(
+                    const SizedBox(width: 10),
+                    const Text(
                       'Price: \$1500',
                       style: TextStyle(
                         decoration: TextDecoration.lineThrough,
@@ -64,7 +66,7 @@ class EcommerceScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     // Add to Cart Functionality
@@ -77,7 +79,7 @@ class EcommerceScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Add to Cart',
                     style: TextStyle(
                       fontSize: 18.0,
@@ -87,17 +89,17 @@ class EcommerceScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Product Description
-            Text(
+            const Text(
               'Product Description',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus elit ligula, vel ullamcorper orci volutpat eget. Donec auctor, sem vel tristique feugiat, velit justo convallis lorem, et consectetur lacus orci id nulla. Quisque sed arcu in nunc lacinia eleifend. Proin non lacus nec tellus vestibulum fermentum. Aliquam tincidunt velit sit amet augue luctus, nec vestibulum magna malesuada.',
               style: TextStyle(fontSize: 16),
             ),

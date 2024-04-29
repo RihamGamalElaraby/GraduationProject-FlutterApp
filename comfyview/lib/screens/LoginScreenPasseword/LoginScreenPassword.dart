@@ -9,6 +9,8 @@ class LoginScreenPassword extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginScreenPassword({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginPasswordCubit, LoginPasswordStates>(
@@ -29,7 +31,7 @@ class LoginScreenPassword extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.black,
@@ -44,7 +46,7 @@ class LoginScreenPassword extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       TextFormField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -56,13 +58,13 @@ class LoginScreenPassword extends StatelessWidget {
                         },
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          prefixIcon: Icon(Icons.email),
+                          prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       TextFormField(
                         controller: passwordController,
                         obscureText: true,
@@ -74,9 +76,9 @@ class LoginScreenPassword extends StatelessWidget {
                         },
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          prefixIcon: Icon(Icons.lock),
+                          prefixIcon: const Icon(Icons.lock),
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.visibility),
+                            icon: const Icon(Icons.visibility),
                             onPressed: () {
                               // Handle password visibility
                             },
@@ -86,9 +88,9 @@ class LoginScreenPassword extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       ConditionalBuilder(
-                        condition: !(state is LoadingLoginPasswordstate),
+                        condition: state is! LoadingLoginPasswordstate,
                         builder: (context) => SizedBox(
                           width: 300,
                           child: ElevatedButton(
@@ -103,7 +105,7 @@ class LoginScreenPassword extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 vertical: 12.0,
                                 horizontal: 24.0,
                               ),
@@ -111,7 +113,7 @@ class LoginScreenPassword extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               'Login',
                               style: TextStyle(
                                 fontSize: 18.0,
@@ -126,7 +128,7 @@ class LoginScreenPassword extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -141,7 +143,7 @@ class LoginScreenPassword extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(context, 'RegisterScreen');
                             },
-                            child: Text(
+                            child: const Text(
                               'REGISTER',
                               style: TextStyle(
                                 color: Colors.blue,

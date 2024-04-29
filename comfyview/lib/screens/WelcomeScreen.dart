@@ -57,7 +57,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                      MaterialPageRoute(builder: (context) => const LoginScreen()));
                 },
                 child: Text(
                   'Skip',
@@ -110,7 +110,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         if (isLast) {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                                  builder: (context) => const LoginScreen()));
                         } else {
                           boarderController.nextPage(
                               duration: const Duration(milliseconds: 750),
@@ -142,7 +142,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             model.title,
             style: TextStyle(
@@ -152,16 +152,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               model.body,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
         ],
       );
 }

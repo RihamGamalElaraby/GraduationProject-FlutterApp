@@ -63,7 +63,6 @@ void main() async {
   /////////////////////////////////////////////////////////////////////////////
   runApp(
     MultiBlocProvider(
-      child: const MyApp(),
       providers: [
         BlocProvider(
           create: (context) => ComfyviewCubit(),
@@ -73,6 +72,7 @@ void main() async {
         ),
         BlocProvider(create: (context) => RegisterCubit())
       ],
+      child: const MyApp(),
     ),
   );
 }
@@ -133,11 +133,11 @@ class MyApp extends StatelessWidget {
             initialRoute: 'welcomeScreen',
             routes: {
               'welcomeScreen': (context) => const OnBoardingScreen(),
-              'loginScreenCamera': (context) => LoginScreen(),
+              'loginScreenCamera': (context) => const LoginScreen(),
               'layoutScreen': (context) => const GlobalLayout(),
               'loginScreenPass': (context) => LoginScreenPassword(),
               'RegisterScreen': (context) => RegisterScreen(),
-              'ResultScreen': (context) => resultScreen(),
+              'ResultScreen': (context) => const resultScreen(),
               'profileScreen': (context) => const ProfileScreen(),
               'settinfScreen': (context) => const SettingScreen(),
               'lostandfound': (context) => LostAndFound(),

@@ -1,8 +1,134 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'dart:io';
+
+import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late CameraController _cameraController;
+  late List<CameraDescription> _cameras;
+  bool _isCameraReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeCamera();
+  }
+
+  Future<void> _initializeCamera() async {
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      _cameras = await availableCameras();
+      // Find the front camera
+      CameraDescription frontCamera = _cameras.firstWhere(
+        (camera) => camera.lensDirection == CameraLensDirection.front,
+      );
+      _cameraController = CameraController(frontCamera, ResolutionPreset.high);
+      await _cameraController.initialize();
+      if (!mounted) return;
+      setState(() {
+        _isCameraReady = true;
+      });
+    } catch (e) {
+      print("Error initializing camera: $e");
+    }
+  }
+
+  @override
+  void dispose() {
+    _cameraController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _takePicture(BuildContext context) async {
+    if (!_isCameraReady) {
+      return;
+    }
+
+    try {
+      final XFile picture = await _cameraController.takePicture();
+      final File imageFile = File(picture.path);
+      await _uploadPhoto(imageFile, context);
+        } catch (e) {
+      print("Error taking picture: $e");
+    }
+  }
+
+  Future<void> _uploadPhoto(File imageFile, BuildContext context) async {
+    try {
+      Dio dio = Dio();
+      FormData formData = FormData.fromMap({
+        'photo': await MultipartFile.fromFile(imageFile.path),
+      });
+
+      // Post photo to the API
+      Response response = await dio.post(
+        'https://cc64-156-215-253-117.ngrok-free.app/compare_faces',
+        data: formData,
+      );
+
+      // Check response and show dialog accordingly
+      if (response.data['similarities'] != 'None') {
+        _showSuccessDialog(context, response.data['similarities']);
+      } else {
+        _showErrorDialog(context);
+      }
+    } catch (e) {
+      print("Error uploading photo: $e");
+    }
+  }
+
+  void _showSuccessDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Success"),
+          content: Text("Hello $message"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'layoutScreen');
+              },
+              child: const Row(
+                children: [
+                  Text("Go to Layout"),
+                  Icon(Icons.arrow_forward),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: const Text("Please try again"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Dismiss dialog
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,37 +138,38 @@ class LoginScreen extends StatelessWidget {
         elevation: 0, // Remove appbar shadow
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildLogo(), // Customized logo widget
-              SizedBox(height: 20),
-              Text(
-                'Login',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+      body: !_isCameraReady
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _buildLogo(), // Customized logo widget
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildFacePrintInfo(), // Customized faceprint information
+                    const SizedBox(height: 20),
+                    _buildOpenCameraButton(
+                        context), // Customized open camera button
+                    const SizedBox(height: 20),
+                    _buildOtherOptions(
+                        context), // Customized other options (password login, registration)
+                  ],
                 ),
               ),
-              SizedBox(height: 20),
-              _buildFacePrintInfo(), // Customized faceprint information
-              SizedBox(height: 20),
-              _buildOpenCameraButton(), // Customized open camera button
-              SizedBox(height: 20),
-              _buildLoginButton(context), // Customized login button
-              SizedBox(height: 20),
-              _buildOtherOptions(
-                  context), // Customized other options (password login, registration)
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
@@ -50,7 +177,7 @@ class LoginScreen extends StatelessWidget {
     return Container(
       height: 150,
       width: 150,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color.fromARGB(255, 248, 250, 252),
         shape: BoxShape.circle,
       ),
@@ -63,7 +190,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildFacePrintInfo() {
-    return Column(
+    return const Column(
       children: [
         Text(
           'We protect your information with',
@@ -85,11 +212,11 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOpenCameraButton() {
+  Widget _buildOpenCameraButton(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           'Open Camera',
           style: TextStyle(
             color: Colors.black,
@@ -98,44 +225,12 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.camera_alt_outlined),
+          onPressed: () {
+            _takePicture(context);
+          },
+          icon: const Icon(Icons.camera_alt_outlined),
         ),
       ],
-    );
-  }
-
-  Widget _buildLoginButton(BuildContext context) {
-    return ConditionalBuilder(
-      condition: true,
-      builder: (context) => SizedBox(
-        width: 300,
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, 'layoutScreen');
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          child: Text(
-            'Login',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-      fallback: (context) => Center(
-        child: CircularProgressIndicator(
-          color: Colors.blue[900],
-        ),
-      ),
     );
   }
 
@@ -145,7 +240,7 @@ class LoginScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Login Using Password!',
               style: TextStyle(
                 color: Colors.black,
@@ -157,7 +252,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, 'loginScreenPass');
               },
-              child: Text(
+              child: const Text(
                 'HERE',
                 style: TextStyle(
                   color: Colors.blue,
@@ -171,7 +266,7 @@ class LoginScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Don\'t have an account?',
               style: TextStyle(
                 color: Colors.black,
@@ -183,7 +278,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, 'RegisterScreen');
               },
-              child: Text(
+              child: const Text(
                 'REGISTER',
                 style: TextStyle(
                   color: Colors.blue,

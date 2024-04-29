@@ -3,13 +3,15 @@ import 'package:comfyview/models/resultModel.dart';
 import 'package:flutter/material.dart';
 
 class resultScreen extends StatelessWidget {
+  const resultScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ResultSModel>>(
       stream: _getResultsStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
@@ -17,7 +19,7 @@ class resultScreen extends StatelessWidget {
             child: Text('Error: ${snapshot.error}'),
           );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(
+          return const Center(
             child: Text('No data available.'),
           );
         } else {
@@ -49,7 +51,7 @@ class resultScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,13 +60,13 @@ class resultScreen extends StatelessWidget {
                               'Result',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline6!
+                                  .titleLarge!
                                   .copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             if (result.result != null &&
                                 result.result!.isNotEmpty) ...[
                               ...result.result!.entries.map<Widget>(
@@ -74,7 +76,7 @@ class resultScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.all(8),
+                                        padding: const EdgeInsets.all(8),
                                         decoration: BoxDecoration(
                                           color: Colors.blue.withOpacity(0.1),
                                           borderRadius:
@@ -84,17 +86,17 @@ class resultScreen extends StatelessWidget {
                                           children: [
                                             Text(
                                               '${entry.key}:',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 16,
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            SizedBox(width: 4),
+                                            const SizedBox(width: 4),
                                             Flexible(
                                               child: Text(
                                                 '${entry.value}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.black87,
                                                 ),
@@ -103,14 +105,14 @@ class resultScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 8),
+                                      const SizedBox(height: 8),
                                     ],
                                   );
                                 },
                               ),
                             ],
-                            SizedBox(height: 8),
-                            Row(
+                            const SizedBox(height: 8),
+                            const Row(
                               children: [
                                 Icon(Icons.location_on, color: Colors.blue),
                                 SizedBox(width: 4),
@@ -123,8 +125,8 @@ class resultScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 4),
-                            Row(
+                            const SizedBox(height: 4),
+                            const Row(
                               children: [
                                 Icon(Icons.access_time, color: Colors.blue),
                                 SizedBox(width: 4),
@@ -146,7 +148,7 @@ class resultScreen extends StatelessWidget {
               );
             },
             separatorBuilder: (context, index) {
-              return Divider();
+              return const Divider();
             },
           );
         }

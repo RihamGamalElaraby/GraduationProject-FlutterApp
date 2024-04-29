@@ -11,6 +11,8 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController gloveIdController = TextEditingController();
 
+  RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterStates>(
@@ -37,7 +39,7 @@ class RegisterScreen extends StatelessWidget {
                         color: Colors.blue[300],
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Comfy View',
                           style: TextStyle(
@@ -48,8 +50,8 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Sign up',
                       style: TextStyle(
                         color: Colors.black,
@@ -57,7 +59,7 @@ class RegisterScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: nameController,
                       keyboardType: TextInputType.name,
@@ -69,13 +71,13 @@ class RegisterScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                         labelText: 'Name',
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.person),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -87,13 +89,13 @@ class RegisterScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
                       controller: gloveIdController,
                       keyboardType: TextInputType.text,
@@ -105,13 +107,13 @@ class RegisterScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                         labelText: 'Glove ID',
-                        prefixIcon: Icon(Icons.fingerprint),
+                        prefixIcon: const Icon(Icons.fingerprint),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
                       controller: passwordController,
                       obscureText: true,
@@ -123,16 +125,16 @@ class RegisterScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: Icon(Icons.visibility),
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: const Icon(Icons.visibility),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ConditionalBuilder(
-                      condition: !(state is SucessesRegisterstate),
+                      condition: state is! SucessesRegisterstate,
                       builder: (context) => SizedBox(
                         width: 300,
                         child: ElevatedButton(
@@ -149,7 +151,7 @@ class RegisterScreen extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               vertical: 12.0,
                               horizontal: 24.0,
                             ),
@@ -157,7 +159,7 @@ class RegisterScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Register',
                             style: TextStyle(
                               fontSize: 18.0,

@@ -12,7 +12,7 @@ class LostAndFound extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Write HERE',
             style: TextStyle(
               color: Colors.black,
@@ -20,25 +20,25 @@ class LostAndFound extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           TextFormField(
             controller: searchController,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelText: 'Search',
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
           ),
-          SizedBox(height: 20),
-          Divider(
+          const SizedBox(height: 20),
+          const Divider(
             thickness: 1,
             color: Colors.black,
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Results',
             style: TextStyle(
               color: Colors.black,
@@ -46,7 +46,7 @@ class LostAndFound extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) => InkWell(
@@ -58,16 +58,16 @@ class LostAndFound extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 40,
                         backgroundImage: AssetImage('images/faceprint.png'),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Text(
                                   'Result: ',
@@ -86,8 +86,8 @@ class LostAndFound extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
-                            Row(
+                            const SizedBox(height: 5),
+                            const Row(
                               children: [
                                 Text(
                                   'Location: ',
@@ -109,8 +109,8 @@ class LostAndFound extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
-                            Row(
+                            const SizedBox(height: 5),
+                            const Row(
                               children: [
                                 Text(
                                   'Time: ',
@@ -129,10 +129,10 @@ class LostAndFound extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Open Google Maps: ',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -143,7 +143,7 @@ class LostAndFound extends StatelessWidget {
                                   onPressed: () {
                                     // Handle Google Maps
                                   },
-                                  icon: Icon(Icons.gps_fixed),
+                                  icon: const Icon(Icons.gps_fixed),
                                 ),
                               ],
                             ),
@@ -154,7 +154,7 @@ class LostAndFound extends StatelessWidget {
                   ),
                 ),
               ),
-              separatorBuilder: (context, index) => Divider(
+              separatorBuilder: (context, index) => const Divider(
                 thickness: 1,
                 color: Colors.blue,
               ),

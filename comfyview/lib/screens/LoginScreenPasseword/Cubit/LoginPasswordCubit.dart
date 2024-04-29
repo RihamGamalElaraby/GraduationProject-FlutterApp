@@ -14,8 +14,6 @@ class LoginPasswordCubit extends Cubit<LoginPasswordStates> {
   void userLogin({
     required String email,
     required String Password,
-    // required String name,
-    // required String gloveid,
   }) async {
     emit((LoadingLoginPasswordstate()));
     try {
