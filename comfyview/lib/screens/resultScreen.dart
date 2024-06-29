@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comfyview/models/resultModel.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class resultScreen extends StatelessWidget {
-  const resultScreen({super.key});
+class ResultScreen extends StatelessWidget {
+  const ResultScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +101,7 @@ class resultScreen extends StatelessWidget {
                                                   fontSize: 16,
                                                   color: Colors.black87,
                                                 ),
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                           ],
@@ -112,29 +114,37 @@ class resultScreen extends StatelessWidget {
                               ),
                             ],
                             const SizedBox(height: 8),
-                            const Row(
+                            Row(
                               children: [
-                                Icon(Icons.location_on, color: Colors.blue),
-                                SizedBox(width: 4),
-                                Text(
-                                  'GPS Location: Add GPS location here', // Replace with actual GPS location
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
+                                const Icon(Icons.location_on,
+                                    color: Colors.blue),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                  child: Text(
+                                    'GPS Location: ${result.location ?? 'Unknown'}', // Display GPS location
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black54,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 4),
-                            const Row(
+                            Row(
                               children: [
-                                Icon(Icons.access_time, color: Colors.blue),
-                                SizedBox(width: 4),
-                                Text(
-                                  'Time: Add time here', // Replace with actual time
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
+                                const Icon(Icons.access_time,
+                                    color: Colors.blue),
+                                const SizedBox(width: 4),
+                                Expanded(
+                                  child: Text(
+                                    'Time: ${result.time ?? 'Unknown'}', // Display time
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black54,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ],
@@ -163,11 +173,21 @@ class resultScreen extends StatelessWidget {
     return resultsCollection.snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
-        return ResultSModel(
-          image: data['image'],
-          result: data['result'] as Map<String, dynamic>?,
-        );
+        return ResultSModel.fromJson(data);
       }).toList();
     });
+  }
+
+  String formatTimestamp(int seconds, int nanoseconds) {
+    // Convert to microseconds
+    int totalMicroseconds =
+        (seconds * 1e6).toInt() + (nanoseconds / 1e3).toInt();
+
+    // Create DateTime object
+    DateTime dateTime =
+        DateTime.fromMicrosecondsSinceEpoch(totalMicroseconds, isUtc: true);
+
+    // Format the DateTime object
+    return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 }

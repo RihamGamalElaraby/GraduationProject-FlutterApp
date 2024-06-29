@@ -1,6 +1,6 @@
 import 'package:comfyview/cubit/states.dart';
 import 'package:comfyview/screens/ecommerceScreen.dart';
-import 'package:comfyview/screens/lostandFoundScreen.dart';
+import 'package:comfyview/screens/lostAndFound/lostandFoundScreen.dart';
 import 'package:comfyview/screens/resultScreen.dart';
 import 'package:comfyview/screens/settingScreen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class ComfyviewCubit extends Cubit<ComfyviewState> {
 
   int currentIndex = 0;
   List<Widget> screens = [
-    const resultScreen(),
+    const ResultScreen(),
     LostAndFound(),
     const EcommerceScreen(),
     const SettingScreen()

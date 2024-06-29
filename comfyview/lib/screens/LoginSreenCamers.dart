@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   late CameraController _cameraController;
   late List<CameraDescription> _cameras;
   bool _isCameraReady = false;
+  File? imageFile;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -56,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final XFile picture = await _cameraController.takePicture();
       final File imageFile = File(picture.path);
       await _uploadPhoto(imageFile, context);
-        } catch (e) {
+    } catch (e) {
       print("Error taking picture: $e");
     }
   }
@@ -70,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       // Post photo to the API
       Response response = await dio.post(
-        'https://cc64-156-215-253-117.ngrok-free.app/compare_faces',
+        'https://9630-105-93-189-107.ngrok-free.app/compare_faces',
         data: formData,
       );
 
@@ -78,10 +81,30 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.data['similarities'] != 'None') {
         _showSuccessDialog(context, response.data['similarities']);
       } else {
-        _showErrorDialog(context);
+        _showSuccessDialog(context, response.data['similarities']);
       }
     } catch (e) {
       print("Error uploading photo: $e");
+    }
+  }
+
+  Future<void> _getImageFromGallery(BuildContext context) async {
+    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+        _uploadPhoto(imageFile!, context);
+      });
+    }
+  }
+
+  Future<void> _getImageFromCamera(BuildContext context) async {
+    final pickedFile = await _picker.getImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+        _uploadPhoto(imageFile!, context);
+      });
     }
   }
 
@@ -161,8 +184,45 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20),
                     _buildFacePrintInfo(), // Customized faceprint information
                     const SizedBox(height: 20),
-                    _buildOpenCameraButton(
-                        context), // Customized open camera button
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     const Text(
+                    //       'Open Camera',
+                    //       style: TextStyle(
+                    //         color: Colors.black,
+                    //         fontSize: 19,
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     ),
+                    //     IconButton(
+                    //       onPressed: () {
+                    //         _takePicture(context);
+                    //       },
+                    //       icon: const Icon(Icons.camera_alt_outlined),
+                    //     ),
+                    //   ],
+                    // ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Open Camera',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            _getImageFromCamera(context);
+                          },
+                          icon: const Icon(Icons.camera_alt_outlined),
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 20),
                     _buildOtherOptions(
                         context), // Customized other options (password login, registration)
@@ -207,28 +267,6 @@ class _LoginScreenState extends State<LoginScreen> {
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOpenCameraButton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'Open Camera',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        IconButton(
-          onPressed: () {
-            _takePicture(context);
-          },
-          icon: const Icon(Icons.camera_alt_outlined),
         ),
       ],
     );

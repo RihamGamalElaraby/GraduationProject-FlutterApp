@@ -7,7 +7,8 @@ import 'package:comfyview/screens/LoginSreenCamers.dart';
 import 'package:comfyview/screens/ProfileScreen.dart';
 import 'package:comfyview/screens/RegisterScreen/Cubit/RegisterCubit.dart';
 import 'package:comfyview/screens/ecommerceScreen.dart';
-import 'package:comfyview/screens/lostandFoundScreen.dart';
+import 'package:comfyview/screens/lostAndFound/cubit/LostAndFoundcubit.dart';
+import 'package:comfyview/screens/lostAndFound/lostandFoundScreen.dart';
 import 'package:comfyview/screens/resultScreen.dart';
 import 'package:comfyview/screens/settingScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,39 +29,6 @@ void main() async {
   );
   Bloc.observer = MyBlocObserver();
   DioHelper.dio;
-  // DioHelper.dio();
-  ///////////////////////////////////////////////////////////////
-  // FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  // // List to store photo URLs
-  // List<Map<String, String>> photoList = [];
-
-  // // Listen to changes in the 'reham' collection
-  // firestore.collection('Reham').snapshots().listen((QuerySnapshot snapshot) {
-  //   snapshot.docChanges.forEach((change) {
-  //     if (change.type == DocumentChangeType.added ||
-  //         change.type == DocumentChangeType.modified) {
-  //       var newValue = change.doc.data();
-  //       // Ensure newValue is Map<String, dynamic>
-  //       if (newValue is Map<String, dynamic>) {
-  //         bool done = newValue['done'];
-
-  //         // Check if the 'done' field is false
-  //         if (!done) {
-  //           // Ensure newValue['photo'] is Map<String, dynamic>
-  //           if (newValue['photo'] is Map<String, dynamic>) {
-  //             var photoUrl = newValue['photo']['url'];
-  //             photoList.add({'photo': photoUrl});
-  //           }
-  //         }
-  //       }
-  //     }
-  //   });
-
-  //   // Print or further process the list
-  //   print(photoList);
-  // });
-  /////////////////////////////////////////////////////////////////////////////
   runApp(
     MultiBlocProvider(
       providers: [
@@ -70,7 +38,10 @@ void main() async {
         BlocProvider(
           create: (context) => LoginPasswordCubit(),
         ),
-        BlocProvider(create: (context) => RegisterCubit())
+        BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(
+          create: (context) => LostAndFoundCubit(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -137,7 +108,7 @@ class MyApp extends StatelessWidget {
               'layoutScreen': (context) => const GlobalLayout(),
               'loginScreenPass': (context) => LoginScreenPassword(),
               'RegisterScreen': (context) => RegisterScreen(),
-              'ResultScreen': (context) => const resultScreen(),
+              'ResultScreen': (context) => const ResultScreen(),
               'profileScreen': (context) => const ProfileScreen(),
               'settinfScreen': (context) => const SettingScreen(),
               'lostandfound': (context) => LostAndFound(),

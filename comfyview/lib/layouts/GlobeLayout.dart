@@ -36,17 +36,18 @@ class _GlobalLayoutState extends State<GlobalLayout> {
               //       size: 25,
               //       color: Colors.blue,
               //     )),
-              IconButton(
-                  padding: const EdgeInsets.all(0),
-                  onPressed: () {
-                    // navigatTo(context, LostAndFound());
-                    Navigator.pushNamed(context, 'profileScreen');
-                  },
-                  icon: const Icon(
-                    Icons.person_3_sharp,
-                    size: 25,
-                    color: Colors.blue,
-                  )),
+              // IconButton(
+              //     padding: const EdgeInsets.all(0),
+              //     onPressed: () {
+              //       // navigatTo(context, LostAndFound());
+              //       Navigator.pop(context);
+              //       // Navigator.pushNamed(context, 'profileScreen');
+              //     },
+              //     icon: const Icon(
+              //       Icons.person_3_sharp,
+              //       size: 25,
+              //       color: Colors.blue,
+              //     )),
             ],
           ),
           body: ComfyviewCubit.get(context)
